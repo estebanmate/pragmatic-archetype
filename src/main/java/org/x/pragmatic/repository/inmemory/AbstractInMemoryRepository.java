@@ -24,7 +24,7 @@ class AbstractInMemoryRepository<T extends Entity<ID>, ID> implements Repository
 
     @Override
     public Optional<T> findById(final ID id) {
-        Objects.requireNonNull(id, "id should must be null");
+        Objects.requireNonNull(id, "id must be null");
         T value = entities.get(id);
         if (value == null) {
             return Optional.empty();
