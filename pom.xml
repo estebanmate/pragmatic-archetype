@@ -16,6 +16,9 @@
 
 	<properties>
 		<java.version>11</java.version>
+		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
+		<archunit-junit5-api.version>0.11.0</archunit-junit5-api.version>
+		<archunit-junit5-engine.version>0.11.0</archunit-junit5-engine.version>
 	</properties>
 
 	<dependencies>
@@ -47,6 +50,19 @@
 			<artifactId>reactor-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit-junit5-api</artifactId>
+			<version>${archunit-junit5-api.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit-junit5-engine</artifactId>
+			<version>${archunit-junit5-engine.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -54,6 +70,10 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${maven-surefire-plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>

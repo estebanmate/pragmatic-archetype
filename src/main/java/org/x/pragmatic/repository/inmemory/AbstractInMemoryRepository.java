@@ -8,8 +8,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.x.pragmatic.domain.Entity;
 import org.x.pragmatic.repository.Repository;
 
-class AbstractInMemoryRepository<T extends Entity<ID>, ID> implements Repository<T, ID> {
-    protected final Map<ID, T> entities;
+abstract class AbstractInMemoryRepository<T extends Entity<ID>, ID> implements Repository<T, ID> {
+    final Map<ID, T> entities;
 
     AbstractInMemoryRepository() {
         entities = new ConcurrentHashMap<>();

@@ -1,9 +1,9 @@
 package org.x.pragmatic.usecase;
 
 @FunctionalInterface
-public interface UseCase<I,O> {
+public interface UseCase {
     Void nullRequest = null;
     Void nullResponse = null;
 
-    O execute(final I request);
+    Response execute(final Request request);
 }
