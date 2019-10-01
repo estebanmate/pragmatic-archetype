@@ -49,6 +49,8 @@
       <directory></directory>
       <includes>
         <include>Dockerfile</include>
+        <include>README.md</include>
+        <include>.gitignore</include>
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">
@@ -56,8 +58,6 @@
       <includes>
         <include>mvnw.cmd</include>
         <include>mvnw</include>
-        <include>README.md</include>
-        <include>.gitignore</include>
         <include>LICENSE</include>
         <include>HELP.md</include>
       </includes>
