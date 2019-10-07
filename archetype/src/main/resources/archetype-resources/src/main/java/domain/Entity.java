@@ -8,7 +8,7 @@ import java.util.Objects;
 public abstract class Entity<T> {
     private final T id;
 
-    public Entity(T id) {
+    protected Entity(T id) {
         this.id = id;
     }
 
