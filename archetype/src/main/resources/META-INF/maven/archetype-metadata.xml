@@ -45,6 +45,12 @@
         <include>**/*.keep</include>
       </includes>
     </fileSet>
+    <fileSet encoding="UTF-8">
+      <directory>src/main/resources/db/migration</directory>
+      <includes>
+        <include>V1__initial_schema.sql</include>
+      </includes>
+    </fileSet>
     <fileSet encoding="UTF-8" filtered="true">
       <directory></directory>
       <includes>
