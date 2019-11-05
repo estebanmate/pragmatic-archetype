@@ -24,7 +24,7 @@
         <include>**/*.keep</include>
       </includes>
     </fileSet>
-    <fileSet encoding="UTF-8">
+    <fileSet encoding="UTF-8" filtered="true">
       <directory>src/main/resources</directory>
       <includes>
         <include>**/*.yml</include>
@@ -55,6 +55,7 @@
       <directory></directory>
       <includes>
         <include>Dockerfile</include>
+        <include>docker-compose.yml</include>
         <include>README.md</include>
         <include>.gitignore</include>
       </includes>
