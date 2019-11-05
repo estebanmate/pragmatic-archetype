@@ -119,8 +119,8 @@
 										</database>
 										<target>
 											<clean>true</clean>
-											<packageName>${groupId}.${artifactId}.db</packageName>
-											<directory>target/generated-sources/jooq</directory>
+											<packageName>${groupId}.${artifactId}.jooq</packageName>
+											<directory>src/main/java</directory>
 										</target>
 									</generator>
 								</configuration>
