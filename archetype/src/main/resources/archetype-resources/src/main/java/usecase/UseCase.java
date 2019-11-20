@@ -4,9 +4,9 @@
 package ${package}.usecase;
 
 @FunctionalInterface
-public interface UseCase {
+public interface UseCase<T extends Request, U extends Response> {
     Void nullRequest = null;
     Void nullResponse = null;
 
-    Response execute(final Request request);
+    U execute(final T request);
 }
