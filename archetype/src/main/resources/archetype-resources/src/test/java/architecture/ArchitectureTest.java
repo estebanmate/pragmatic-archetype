@@ -27,6 +27,7 @@ public class ArchitectureTest {
                     .that().resideInAPackage("..repository..")
                     .and(DescribedPredicate.describe("except Repository itself", cl -> !cl.isEquivalentTo(Repository.class)))
                     .should().implement(Repository.class)
+                    .orShould().beAssignableTo(Repository.class)
                     .andShould().haveSimpleNameEndingWith("Repository");
 
     @ArchTest
@@ -39,15 +40,15 @@ public class ArchitectureTest {
     @ArchTest
     static ArchRule use_case_should_be_transactional =
             methods()
-            .that().areDeclaredInClassesThat().implement(UseCase.class)
-            .and().arePublic()
-            .should().beAnnotatedWith(Transactional.class);
+                    .that().areDeclaredInClassesThat().implement(UseCase.class)
+                    .and().arePublic()
+                    .should().beAnnotatedWith(Transactional.class);
 
     @ArchTest
     static ArchRule resources_should_be_suffixed =
             classes()
-            .that().resideInAPackage("..resource..")
-            .should().haveSimpleNameEndingWith("Resource");
+                    .that().resideInAPackage("..resource..")
+                    .should().haveSimpleNameEndingWith("Resource");
 
     @ArchTest
     static ArchRule requests_should_implement_request =
@@ -62,11 +63,11 @@ public class ArchitectureTest {
                     .should().implement(Response.class);
 
     @ArchTest
-    static ArchRule use_cases_should_depend_only_on_repositories_services_and_mappers =
+    static ArchRule use_cases_should_depend_only_on_repositories_services_mappers_requests_and_responses =
             classes()
-            .that().resideInAPackage("..usecase..")
-            .should().onlyHaveDependentClassesThat().resideInAnyPackage("..repository..",
-                    "..service..", "..mapper..", "..usecase..");
+                    .that().resideInAPackage("..usecase..")
+                    .should().onlyHaveDependentClassesThat().resideInAnyPackage("..repository..",
+                    "..service..", "..mapper..", "..usecase..", "..request", "..response..");
 
     @ArchTest
     static ArchRule resources_should_depend_only_on_usecase =
@@ -74,4 +75,3 @@ public class ArchitectureTest {
                     .that().resideInAPackage("..resource..")
                     .should().onlyHaveDependentClassesThat().resideInAnyPackage("..usecase..");
 }
-

@@ -45,6 +45,27 @@
         <include>**/*.keep</include>
       </includes>
     </fileSet>
+    <fileSet encoding="UTF-8" filtered="true">
+      <directory>src/test/resources</directory>
+      <includes>
+        <include>**/*.keep</include>
+      </includes>
+    </fileSet>
+    <!-- integration tests directory-->
+    <fileSet filtered="true" packaged="true" encoding="UTF-8">
+      <directory>src/it/java</directory>
+      <includes>
+        <include>**/*.java</include>
+      </includes>
+    </fileSet>
+    <!-- integration tests resources-->
+    <fileSet encoding="UTF-8" filtered="true">
+      <directory>src/it/resources</directory>
+      <includes>
+        <include>**/*.keep</include>
+      </includes>
+    </fileSet>
+    <!-- initial migration script-->
     <fileSet encoding="UTF-8">
       <directory>src/main/resources/db/migration</directory>
       <includes>
