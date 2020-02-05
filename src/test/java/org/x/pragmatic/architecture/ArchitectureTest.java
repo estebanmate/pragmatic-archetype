@@ -23,6 +23,7 @@ public class ArchitectureTest {
             classes()
                     .that().resideInAPackage("..repository..")
                     .and(DescribedPredicate.describe("except Repository itself", cl -> !cl.isEquivalentTo(Repository.class)))
+                    .and(DescribedPredicate.describe("except test classes", cl -> !cl.getName().endsWith("Test")))
                     .should().implement(Repository.class)
                     .andShould().haveSimpleNameEndingWith("Repository");
 
