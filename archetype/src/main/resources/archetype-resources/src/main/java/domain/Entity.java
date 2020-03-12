@@ -6,7 +6,7 @@ package ${package}.domain;
 import java.util.Objects;
 
 public abstract class Entity<T> {
-    private final T id;
+    private T id;
 
     protected Entity(T id) {
         this.id = id;
@@ -14,6 +14,10 @@ public abstract class Entity<T> {
 
     public T getId() {
         return id;
+    }
+
+    public void identifyBy(final T id) {
+        this.id = id;
     }
 
     @Override

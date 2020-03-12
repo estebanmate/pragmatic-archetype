@@ -1,0 +1,2 @@
+logging.level:
+  org.jooq.tools.LoggerListener: DEBUG

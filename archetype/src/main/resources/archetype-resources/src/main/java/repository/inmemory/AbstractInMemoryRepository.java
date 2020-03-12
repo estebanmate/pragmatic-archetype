@@ -20,9 +20,15 @@ abstract class AbstractInMemoryRepository<T extends Entity<ID>, ID> implements R
 
     @Override
     public ID save(final T entity) {
-        Objects.requireNonNull(entity.getId(), "id must not be null");
-        entities.put(entity.getId(), entity);
-        return entity.getId();
+        var id = entity.getId();
+        if (entity.getId() == null) {
+            id = getRandomId();
+            entities.put(id, entity);
+            entity.identifyBy(id);
+            return id;
+        }
+        entities.put(id, entity);
+        return id;
     }
 
     @Override
