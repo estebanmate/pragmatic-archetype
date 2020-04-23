@@ -3,16 +3,18 @@
 #set( $symbol_escape = '\' )
 package ${package}.rest.handler;
 
-
 import java.util.List;
 
 import javax.annotation.Priority;
 
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.core.Ordered;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpMediaTypeNotAcceptableException;
@@ -31,13 +33,23 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Priority(value = Ordered.HIGHEST_PRECEDENCE)
 public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
+    private final MessageSource messageSource;
+
+    public GlobalExceptionHandler(final MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     @Override
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(final HttpRequestMethodNotSupportedException ex,
                                                                          final HttpHeaders headers,
                                                                          final HttpStatus status,
                                                                          final WebRequest request) {
-        var detail = String.format("HTTP Method '%s' not supported for this endpoint", ex.getMethod());
+        var locale = LocaleContextHolder.getLocale();
+        var detail = messageSource.getMessage(
+                "exception.global.http.request.method.not.supported",
+                new Object[]{ex.getMethod()},
+                locale
+        );
         return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(ErrorDetail.with()
@@ -53,12 +65,18 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
                                                                   final WebRequest request) {
         List<ObjectError> globalErrors = ex.getBindingResult().getGlobalErrors();
         List<FieldError> fieldErrors = ex.getBindingResult().getFieldErrors();
+        var locale = LocaleContextHolder.getLocale();
+        var detail = messageSource.getMessage(
+                "exception.global.method.argument.not.valid",
+                null,
+                locale
+        );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(ErrorDetail.with()
                         .status(HttpStatus.BAD_REQUEST.value())
                         .title(HttpStatus.BAD_REQUEST.getReasonPhrase())
-                        .detail("invalid request body")
+                        .detail(detail)
                         .objectErrors(globalErrors)
                         .fieldErrors(fieldErrors));
     }
@@ -68,7 +86,12 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
                                                                      final HttpHeaders headers,
                                                                      final HttpStatus status,
                                                                      final WebRequest request) {
-        var detail = String.format("media type '%s' not supported", ex.getContentType());
+        var locale = LocaleContextHolder.getLocale();
+        var detail = messageSource.getMessage(
+                "exception.global.http.media.type.not.supported",
+                new Object[]{ex.getContentType()},
+                locale
+        );
         return ResponseEntity.status(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(ErrorDetail.with()
@@ -82,7 +105,12 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
                                                                       final HttpHeaders headers,
                                                                       final HttpStatus status,
                                                                       final WebRequest request) {
-        var detail = "invalid Accept header value";
+        var locale = LocaleContextHolder.getLocale();
+        var detail = messageSource.getMessage(
+                "exception.global.http.media.type.not.acceptable",
+                null,
+                locale
+        );
         return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(ErrorDetail.with()
@@ -96,7 +124,12 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
                                                                final HttpHeaders headers,
                                                                final HttpStatus status,
                                                                final WebRequest request) {
-        var detail = String.format("missing path variable '%s'", ex.getVariableName());
+        var locale = LocaleContextHolder.getLocale();
+        var detail = messageSource.getMessage(
+                "exception.global.missing.path.variable",
+                new Object[]{ex.getVariableName()},
+                locale
+        );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(ErrorDetail.with()
@@ -110,7 +143,12 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
                                                                           final HttpHeaders headers,
                                                                           final HttpStatus status,
                                                                           final WebRequest request) {
-        var detail = String.format("missing request param '%s' of type '%s'", ex.getParameterName(), ex.getParameterType());
+        var locale = LocaleContextHolder.getLocale();
+        var detail = messageSource.getMessage(
+                "exception.global.missing.servlet.request.parameter",
+                new Object[]{ex.getParameterName(), ex.getParameterType()},
+                locale
+        );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(ErrorDetail.with()
@@ -124,7 +162,27 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
                                                                    final HttpHeaders headers,
                                                                    final HttpStatus status,
                                                                    final WebRequest request) {
-        var detail = String.format("unknown resource endpoint '%s'", ex.getRequestURL());
+        var locale = LocaleContextHolder.getLocale();
+        var detail = messageSource.getMessage(
+                "exception.global.no.handler.found.exception",
+                new Object[]{ex.getRequestURL()},
+                locale
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+                .body(ErrorDetail.with()
+                        .status(HttpStatus.BAD_REQUEST.value())
+                        .title(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                        .detail(detail));
+    }
+
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex,
+                                                                  final HttpHeaders headers,
+                                                                  final HttpStatus status,
+                                                                  final WebRequest request) {
+        var locale = LocaleContextHolder.getLocale();
+        var detail = messageSource.getMessage("exception.global.http.message.not.readable", new Object[]{}, locale);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(ErrorDetail.with()
@@ -139,7 +197,12 @@ public final class GlobalExceptionHandler extends ResponseEntityExceptionHandler
                                                              final HttpHeaders headers,
                                                              final HttpStatus status,
                                                              final WebRequest request) {
-        var detail = String.format("internal error");
+        var locale = LocaleContextHolder.getLocale();
+        var detail = messageSource.getMessage(
+                "exception.global.internal",
+                null,
+                locale
+        );
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .contentType(MediaType.APPLICATION_PROBLEM_JSON)
                 .body(ErrorDetail.with()

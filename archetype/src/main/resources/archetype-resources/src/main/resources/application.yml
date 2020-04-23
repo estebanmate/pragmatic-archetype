@@ -1,8 +1,11 @@
 #set( $symbol_pound = '#' )
 #set( $symbol_dollar = '$' )
 #set( $symbol_escape = '\' )
-spring.datasource:
-  driver-class-name: org.postgresql.Driver
-  url: jdbc:postgresql://db:5432/${artifactId}-db
-  username: postgres
-  password: pass
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db:5432/{artifactId}-db
+    username: postgres
+    password: pass
+  messages:
+    basename: i18n.messages

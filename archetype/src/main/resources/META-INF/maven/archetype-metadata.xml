@@ -72,6 +72,13 @@
         <include>V1__initial_schema.sql</include>
       </includes>
     </fileSet>
+    <!-- i18n -->
+    <fileSet encoding="UTF-8">
+      <directory>src/main/resources/i18n</directory>
+      <includes>
+        <include>messages.properties</include>
+      </includes>
+    </fileSet>
     <fileSet encoding="UTF-8" filtered="true">
       <directory></directory>
       <includes>
