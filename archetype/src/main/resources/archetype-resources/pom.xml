@@ -22,6 +22,9 @@
 		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
 		<testcontainers-bom.version>1.12.3</testcontainers-bom.version>
+		<springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+		<springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
+		<springfox-bean-validators.version>2.9.2</springfox-bean-validators.version>
 	</properties>
 
 	<!-- testcontainers BOM-->
@@ -55,6 +58,21 @@
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-swagger2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox-swagger-ui.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-bean-validators</artifactId>
+			<version>${springfox-bean-validators.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
