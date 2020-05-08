@@ -86,6 +86,9 @@
         <include>docker-compose.yml</include>
         <include>README.md</include>
         <include>.gitignore</include>
+        <include>prometheus/**/*.yml</include>
+        <include>grafana/**/*.monitoring</include>
+        <include>grafana/provisioning/*.keep</include>
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">

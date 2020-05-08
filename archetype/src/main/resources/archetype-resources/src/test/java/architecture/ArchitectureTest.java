@@ -36,6 +36,8 @@ public class ArchitectureTest {
                     .that().resideInAnyPackage("..usecase..")
                     .and(DescribedPredicate.describe("except UseCase itself",
                             cl -> !cl.isEquivalentTo(UseCase.class) && !cl.isEquivalentTo(Request.class) && !cl.isEquivalentTo(Response.class)))
+                    .and(DescribedPredicate.describe("except test classes", cl -> !cl.getName().endsWith("Test")))
+                    .and(DescribedPredicate.describe("except exceptions", cl -> !cl.getPackageName().endsWith("exception")))
                     .should().implement(UseCase.class);
     @ArchTest
     static ArchRule use_case_should_be_transactional =
