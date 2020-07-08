@@ -68,8 +68,8 @@ public class ArchitectureTest {
     static ArchRule use_cases_should_depend_only_on_repositories_services_mappers_requests_and_responses =
             classes()
                     .that().resideInAPackage("..usecase..")
-                    .should().onlyHaveDependentClassesThat().resideInAnyPackage("..repository..",
-                    "..service..", "..mapper..", "..usecase..", "..request", "..response..");
+                    .and(DescribedPredicate.describe("except exceptions", cl -> !cl.getPackageName().endsWith("exception")))
+                    .should().dependOnClassesThat().resideInAnyPackage("..repository..", "..service..", "..mapper..", "..usecase..", "..request", "..response..");
 
     @ArchTest
     static ArchRule resources_should_depend_only_on_usecase =

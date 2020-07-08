@@ -1,0 +1,39 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+name: Pipeline
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  APPLICATION_NAME: ${appName}
+
+jobs:
+  unit_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup Java environment
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: run unit tests
+        run: mvn test
+
+  integration_tests:
+    needs: [unit_tests]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup Java environment
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: apply database migrations
+        run: mvn generate-sources -Pjooq
+      - name: run integration tests
+        run: mvn verify -Pit

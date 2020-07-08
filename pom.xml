@@ -17,8 +17,8 @@
 	<properties>
 		<java.version>11</java.version>
 		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
-		<archunit-junit5-api.version>0.11.0</archunit-junit5-api.version>
-		<archunit-junit5-engine.version>0.11.0</archunit-junit5-engine.version>
+		<archunit-junit5-api.version>0.14.1</archunit-junit5-api.version>
+		<archunit-junit5-engine.version>0.14.1</archunit-junit5-engine.version>
 	</properties>
 
 	<dependencies>

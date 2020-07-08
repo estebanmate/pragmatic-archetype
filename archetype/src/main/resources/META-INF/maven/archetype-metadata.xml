@@ -89,6 +89,7 @@
         <include>prometheus/**/*.yml</include>
         <include>grafana/**/*.monitoring</include>
         <include>grafana/provisioning/*.keep</include>
+        <include>.github/**/*.yml</include>
       </includes>
     </fileSet>
     <fileSet encoding="UTF-8">

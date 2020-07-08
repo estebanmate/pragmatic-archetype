@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.2.6.RELEASE</version> <!-- lookup parent from repository -->
+		<version>2.3.1.RELEASE</version> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>${groupId}</groupId>
 	<artifactId>${artifactId}</artifactId>
@@ -15,10 +15,10 @@
 	<properties>
 		<java.version>11</java.version>
 		<maven-surefire-plugin.version>2.22.0</maven-surefire-plugin.version>
-		<archunit-junit5-api.version>0.11.0</archunit-junit5-api.version>
-		<archunit-junit5-engine.version>0.11.0</archunit-junit5-engine.version>
-		<jooq-codegen-maven.version>3.12.2</jooq-codegen-maven.version>
-		<jooq-meta-extensions.version>3.12.3</jooq-meta-extensions.version>
+		<archunit-junit5-api.version>0.14.1</archunit-junit5-api.version>
+		<archunit-junit5-engine.version>0.14.1</archunit-junit5-engine.version>
+		<jooq-codegen-maven.version>3.13.2</jooq-codegen-maven.version>
+		<jooq-meta-extensions.version>3.13.2</jooq-meta-extensions.version>
 		<maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
 		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
 		<testcontainers-bom.version>1.12.3</testcontainers-bom.version>
@@ -48,6 +48,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
 		<dependency>

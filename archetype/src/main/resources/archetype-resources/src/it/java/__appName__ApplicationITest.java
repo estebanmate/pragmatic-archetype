@@ -4,12 +4,9 @@
 package ${package};
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import ${package}.common.DatabaseAware;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+@DatabaseAware
 public class ${appName}ApplicationITest {
 
 	@Test
