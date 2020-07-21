@@ -1,6 +1,8 @@
 # Pragmatic
 An opinionated  Maven archetype to quickly bootstrap backend API on a sane basis.
 
+# How to generate
+
 ## Architecture
 ![supervision_tree](assets/pragmatic.png)
 
@@ -43,7 +45,8 @@ Spring Beans must be created explicitly (i.e without `@Repository`, `@Service`, 
 - i18n-ready API error messages and default messages for common errors
 - Swagger documentation under `/api-doc` and `/swagger` for all controllers
 - A docker and docker compose environment for local development 
-- Monitoring with [Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html), [Prometheus](https://prometheus.io/) and [Grafana](https://grafana.com/) 
+- Monitoring with [Actuator](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html) available at `/actuator`, 
+ [Prometheus](https://prometheus.io/) on port `9090` and [Grafana](https://grafana.com/) on port `3000` (default admin password is **!changeMe!**)
 - A Github pipeline to run unit and integration tests upon pull request and merge on the `master` branch
 
 ## Common commands
