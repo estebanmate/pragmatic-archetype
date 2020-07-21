@@ -1,0 +1,77 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+---
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: ${artifactId}-db
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+    networks:
+      - backend
+    restart: always
+
+  ${artifactId}:
+    depends_on:
+      - db
+    build: .
+    image: ${artifactId}:latest
+    ports:
+      - '8080:8080'
+    networks:
+      - backend
+    restart: always
+
+  prometheus:
+    image: prom/prometheus:v2.18.1
+    volumes:
+      - ./prometheus/:/etc/prometheus/
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    ports:
+      - 9090:9090
+    depends_on:
+      - ${artifactId}
+    networks:
+      - backend
+    restart: always
+
+  grafana:
+    image: grafana/grafana:7.0.0-beta2-ubuntu
+    user: "472"
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning/:/etc/grafana/provisioning/
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - backend
+      - frontend
+    restart: always
+
+networks:
+  backend:
+     driver: bridge
+  frontend:
+    driver: bridge
+
+volumes:
+  db-data:
+  prometheus-data:
+  grafana-data:
