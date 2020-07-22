@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.x</groupId>
+  <groupId>fun.salmanebah</groupId>
   <artifactId>pragmatic-archetype</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <properties>
@@ -10,7 +10,9 @@
   </properties>
   <packaging>maven-archetype</packaging>
 
-  <name>pragmatic-archetype</name>
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>An opinionated Maven archetype to quickly bootstrap backend API on a sane basis.</description>
+  <url>https://github.com/salmanebah/pragmatic-archetype</url>
 
   <build>
     <extensions>
@@ -26,6 +28,11 @@
         <plugin>
           <artifactId>maven-archetype-plugin</artifactId>
           <version>3.1.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>3.0.0-M1</version>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -43,10 +50,6 @@
     </plugins>
   </build>
 
-  <description>Pragmatic archetype</description>
-
-  <url>https://github.com/salmanebah/pragmatic-archetype</url>
-
   <developers>
     <developer>
       <name>Salmane BAH</name>
@@ -62,6 +65,16 @@
   </licenses>
 
   <scm>
+    <connection>scm:git:git://github.com/salmanebah/pragmatic-archetype.git</connection>
+    <developerConnection>scm:git:git@github.com:salmanebah/pragmatic-archetype.git</developerConnection>
     <url>https://github.com/salmanebah/pragmatic-archetype</url>
   </scm>
+
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub salmanebah Apache Maven Packages</name>
+      <url>https://maven.pkg.github.com/salmanebah/pragmatic-archetype</url>
+    </repository>
+  </distributionManagement>
 </project>
