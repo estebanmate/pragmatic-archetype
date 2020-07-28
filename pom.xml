@@ -4,7 +4,7 @@
 
   <groupId>fun.salmanebah</groupId>
   <artifactId>pragmatic-archetype</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.2</version>
   <properties>
     <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
   </properties>
@@ -68,7 +68,7 @@
     <connection>scm:git:git://github.com/salmanebah/pragmatic-archetype.git</connection>
     <developerConnection>scm:git:git@github.com:salmanebah/pragmatic-archetype.git</developerConnection>
     <url>https://github.com/salmanebah/pragmatic-archetype</url>
-    <tag>HEAD</tag>
+    <tag>pragmatic-archetype-0.0.2</tag>
   </scm>
 
   <distributionManagement>
