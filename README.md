@@ -1,7 +1,13 @@
 # Pragmatic
 An opinionated  Maven archetype to quickly bootstrap backend API on a sane basis.
+Pragmatic is in the early phase of development and is not production ready. 
+Contributions are welcomed.
 
-# How to generate
+# How to use
+1. Clone the project: `git clone git@github.com:salmanebah/pragmatic-archetype.git`
+2. Install locally: `mvn install`
+3. Generate a project:  `cd directory/where/to/generate` and `mvn archetype:generate -DarchetypeCatalog=local` 
+4. Follow the instructions to complete the generation.
 
 ## Architecture
 ![supervision_tree](assets/pragmatic.png)
@@ -9,7 +15,7 @@ An opinionated  Maven archetype to quickly bootstrap backend API on a sane basis
 ## Philosophy
 - Only use frameworks and libraries when really needed: `Java SE > JSR > Spring framework > other libraries`
 - Prefer programmatic Spring setup to their annotation-driven counterpart (exception in `Controller`, `Request` and `Response` objects)
-- Strive for rich domain and avoid an anemic domain at all cost
+- Strive for rich domains and avoid anemic domains at all cost
 - Avoid Mapping frameworks
 - Restrict usage of mocking frameworks to the minimum. If possible use an in-memory version of the SUT collaborators.
 - Keep [these principles](https://github.com/KentBeck/TestDesiderata/blob/master/index.md) when writing tests

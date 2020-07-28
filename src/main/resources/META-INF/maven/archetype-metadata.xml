@@ -5,7 +5,9 @@
   <requiredProperties>
     <requiredProperty key="projectName" />
     <requiredProperty key="projectDescription" />
-    <requiredProperty key="appName" />
+    <requiredProperty key="appName">
+            <validationRegex>^[A-Z].*</validationRegex>
+    </requiredProperty>
   </requiredProperties>
   <fileSets>
     <fileSet filtered="true" packaged="true" encoding="UTF-8">
